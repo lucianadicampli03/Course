@@ -1,0 +1,68 @@
+package packageOne;
+
+/*
+Author: Luciana Di Campli
+Course: RVD 1231
+Date: 02/07/2023
+Assignment: Course
+Instructor: Sergio Pisano
+*/ 
+
+import java.util.Scanner;
+
+public class ProgramLab {
+   public static void main(String[] args) {
+
+       final double HOMEWORK_MAX = 800.0;
+       final double QUIZZES_MAX = 400.0;
+       final double MIIDTERM_MAX = 150.0; // correct the typo here II
+       final double FINAL_MAX = 200.0;
+
+       Scanner scnr = new Scanner(System.in);
+       /* Type your code here. */
+       String status, courseGrade;
+       double hw, qz, mt, fe;
+       double hwPercentage, qzPercentage, mtPercentage, fePercentage, overallPercentage;
+       status = scnr.next();
+       hw = scnr.nextDouble();
+       qz = scnr.nextDouble();
+       mt = scnr.nextDouble();
+       fe = scnr.nextDouble();
+       if (status.equals("UG") || status.equals("G") || status.equals("DL")) {
+
+           // find percentages for all assignments
+           hwPercentage = hw >= HOMEWORK_MAX ? 100.0 : hw * 100 / HOMEWORK_MAX;
+           qzPercentage = qz >= QUIZZES_MAX ? 100.0 : qz * 100 / QUIZZES_MAX;
+           mtPercentage = mt >= MIIDTERM_MAX ? 100.0 : mt * 100 / MIIDTERM_MAX; // correct the type here
+           fePercentage = fe >= FINAL_MAX ? 100.0 : fe * 100 / FINAL_MAX;
+
+           // calculate overall percentage for the status
+           if (status.equals("UG"))
+               overallPercentage = hwPercentage * 0.20 + qzPercentage * 0.20 + mtPercentage * 0.3 + fePercentage * 0.3;
+           else if (status.equals("G"))
+               overallPercentage = hwPercentage * 0.15 + qzPercentage * 0.05 + mtPercentage * 0.35 + fePercentage * 0.45;
+           else
+               overallPercentage = hwPercentage * 0.05 + qzPercentage * 0.05 + mtPercentage * 0.4 + fePercentage * 0.5;
+
+           // calculate course grade
+           if(overallPercentage>=90) courseGrade = "A";
+           else if(overallPercentage>=80) courseGrade = "B";
+           else if(overallPercentage>=70) courseGrade = "C";
+           else if(overallPercentage>=60) courseGrade = "D";
+           else courseGrade = "F";
+
+           System.out.printf("Homework: %.1f%%\n", hwPercentage);
+           System.out.printf("Quizzes: %.1f%%\n", qzPercentage);
+           System.out.printf("Midterm: %.1f%%\n", mtPercentage);
+           System.out.printf("Final Exam: %.1f%%\n", fePercentage);
+           System.out.printf("%s average: %.1f%%\n",status,overallPercentage);
+           System.out.println("Course grade: "+ courseGrade);
+
+
+
+       } else {
+           System.out.println("Error: student status must be UG, G or DL");
+       }
+
+   }
+}
